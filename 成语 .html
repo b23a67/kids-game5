@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>幼儿成语接龙</title>
+    <style>
+        body { text-align: center; font-family: "微软雅黑"; padding: 20px; }
+        #currentIdiom { font-size: 28px; color: #3498db; margin: 30px 0; }
+        .option-btn {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background: #f1c40f;
+            color: white;
+            cursor: pointer;
+        }
+        .option-btn:hover { background: #f39c12; }
+    </style>
+</head>
+<body>
+    <h1>成语接龙小挑战</h1>
+    <p>接对成语，就能通关哦！</p>
+    <div id="currentIdiom">开门见山</div>
+    <div id="options">
+        <button class="option-btn" onclick="checkAnswer('山高水长')">山高水长</button>
+        <button class="option-btn" onclick="checkAnswer('天高地厚')">天高地厚</button>
+        <button class="option-btn" onclick="checkAnswer('花红柳绿')">花红柳绿</button>
+    </div>
+
+    <script>
+        // 成语库（开头字对应下一个成语）
+        const idiomMap = {
+            "开门见山": "山高水长",
+            "山高水长": "长长久久",
+            "长长久久": "久别重逢"
+        };
+        let current = "开门见山";
+
+        function checkAnswer(answer) {
+            if (answer === idiomMap[current]) {
+                alert("答对啦！真棒！");
+                current = answer; // 切换到下一个成语
+                document.getElementById("currentIdiom").textContent = current;
+                // 刷新选项（简单示例，可扩展更多成语）
+                if (idiomMap[current]) {
+                    document.getElementById("options").innerHTML = `
+                        <button class="option-btn" onclick="checkAnswer('${idiomMap[current]}')">${idiomMap[current]}</button>
+                        <button class="option-btn" onclick="checkAnswer('错误选项1')">错误选项1</button>
+                        <button class="option-btn" onclick="checkAnswer('错误选项2')">错误选项2</button>
+                    `;
+                } else {
+                    alert("恭喜通关！");
+                }
+            } else {
+                alert("再想想哦~");
+            }
+        }
+    </script>
+</body>
+</html>
